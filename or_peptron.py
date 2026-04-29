@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.autograd as agrad
 
 epochs = 500000       # Количество эпох
-h = 0.4               # Шаг обучения (скорость)
+h = 0.5               # Шаг обучения (скорость)
 error_epochs = 0.0001 # Допустимая ошибка
 
 offset = pt.tensor([-0.101], requires_grad=True)                    # Смещение
