@@ -1,6 +1,5 @@
 import torch as pt
 import torch.nn as nn 
-import torch.autograd as agrad
 
 epochs = 500000       # Количество эпох
 h = 0.5               # Шаг обучения (скорость)
