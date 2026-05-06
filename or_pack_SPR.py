@@ -28,7 +28,7 @@ optimizer = optim.SGD(nerve.parameters(),lr=h)
 incons_past = 1     # Прошлая ошибка
 incons_d = 1        # Разница ошибок
 incons_index = 0    # Число одинаковой разницы ошибок
-incons_step = 500   # Предел переменой incons_index
+incons_step = 2000  # Предел переменой incons_index
 
 for index in range(epochs):
     sigm_fun = nerve(x)                 # Вычисление активационной функции
@@ -36,7 +36,6 @@ for index in range(epochs):
 
     # прервать, чтобы не вызвать переобучение
     if incons_past - incons.item() == incons_d:
-        incons_d = incons_past - incons.item()
         incons_index += 1
         if incons_index == incons_step:
             print(f"Число эпох: {index}")
@@ -44,6 +43,9 @@ for index in range(epochs):
     elif incons.item() <= error_epochs:
         print(f"Число эпох: {index}")
         break
+    else:
+        incons_d = incons_past - incons.item()
+
 
     incons_past = incons.item()
 
@@ -54,3 +56,5 @@ for index in range(epochs):
 
 print(f"Выходы после обучения: {sigm_fun.data}")
 print(f"Невязка после обучения: {incons.item()}")
+
+del x, y_ist, nerve, criterion, optimizer, sigm_fun, incons
